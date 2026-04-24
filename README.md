@@ -34,4 +34,4 @@ However, for specific advanced application scenarios—specifically **transcodin
 
 ## How to run SPCast Media Edge
 
-Start here: [main.md](docs/readme.md).
+Start here: [readme.md](docs/readme.md).
