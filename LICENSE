@@ -1,0 +1,58 @@
+SPCast Media Edge End User License Agreement (EULA)
+Copyright (c) 2026 STREAMPANEL / Sven Barthel. All rights reserved.
+
+---
+A Note to Our Community:
+We built SPCast Media Edge to be a powerful, modern alternative to legacy streaming servers. We want the broadcasting community, hobbyists, and small stations to thrive, which is why we offer a generous Free Tier (up to 100 concurrent slots) completely free of charge. Enjoy the software! The formal legal terms below simply protect our intellectual property so we can continue developing this project for you.
+---
+
+This End User License Agreement ("EULA") is a legal agreement between you (either an individual or a single legal entity, hereinafter "Licensee") and the Licensor, Sven Barthel (hereinafter "Licensor" or "STREAMPANEL" and "SPCast"), for the software product SPCast Media Edge, including any associated media, printed materials, and "online" or electronic documentation (collectively, the "Software").
+
+By installing, copying, or otherwise using the Software, you agree to be bound by the terms of this EULA. If you do not agree to the terms of this EULA, do not install or use the Software.
+
+1. PROVIDER INFORMATION (IMPRINT)
+The Software is developed and legally represented by:
+Sven Barthel
+Emsdettener Str. 10
+c/o Postflex #8949
+48268 Greven, Germany
+Email: support@spcast.eu
+
+2. GRANT OF LICENSE AND USAGE TIERS
+The Software is proprietary and closed-source. Upon your agreement to this EULA, the Licensor grants you a limited, non-exclusive, non-transferable license to use the Software as follows:
+
+2.1 Free Tier (Community/Evaluation)
+You may use the Software free of charge for personal, non-commercial, or commercial purposes, provided that the total concurrent capacity across your deployment does not exceed one hundred (100) audio slots, or five (5) video slots.
+
+2.2 Enterprise / Commercial Tier
+Any deployment, configuration, or environment that demands or handles more than one hundred (100) concurrent audio slots or five (5) concurrent video slots requires a valid and active commercial license issued directly by the Licensor. Using multiple connected free instances to bypass the slot limitation is strictly prohibited.
+
+3. RESTRICTIONS AND INTELLECTUAL PROPERTY
+All title, ownership rights, and intellectual property rights in and to the Software remain exclusively with the Licensor.
+You may not, nor permit any third party to:
+a) Decompile, reverse engineer, disassemble, or extract any source code from the compiled binaries.
+b) Subvert, bypass, spoof, or attempt to disable the software's license verification or slot validation mechanisms.
+c) Modify, adapt, translate, or create derivative works based upon the Software.
+d) Remove or alter any copyright, trademark, or other proprietary notices from the Software.
+e) Rent, lease, lend, or sub-license the Software without explicit written permission.
+
+4. REDISTRIBUTION
+Redistribution of the compiled binaries provided in the official public releases is permitted solely in its original, unmodified form. You must include this EULA in all copies of the Software. Any distribution, publication, or leakage of the proprietary source code is strictly prohibited.
+
+5. THIRD-PARTY COMPONENTS (e.g., FFmpeg)
+This Software may interact with optional third-party tools (such as FFmpeg) which are subject to their own respective open-source licenses (e.g., GPL). These tools are invoked as separate, independent command-line processes ("Mere Aggregation") and are not statically or dynamically integrated into this proprietary software. The Licensor claims no ownership over these third-party tools.
+
+6. LIMITATION OF LIABILITY
+The following applies in accordance with German Law:
+a) The Licensor is liable without limitation for intent and gross negligence, as well as for damages resulting from injury to life, body or health.
+b) In cases of slight negligence, the Licensor is only liable for the breach of essential contractual obligations. In such cases, the liability is limited to the foreseeable, typical damage.
+c) Any further liability for damages is excluded. The Software is provided "AS IS" without further warranties of any kind. 
+
+7. TERMINATION
+Without prejudice to any other rights, the Licensor may terminate this EULA if you fail to comply with the terms and conditions outlined herein. In such event, you must immediately cease all use of the Software and destroy all copies of the Software in your possession.
+
+8. GOVERNING LAW AND JURISDICTION
+This EULA shall be governed by and construed in accordance with the laws of the Federal Republic of Germany, excluding its conflict of law provisions and the UN Convention on Contracts for the International Sale of Goods (CISG). The exclusive place of jurisdiction for all disputes arising from or in connection with this agreement shall be Greven, Germany, provided the Licensee is a merchant, a legal entity under public law, or a special fund under public law.
+
+9. SEVERABILITY CLAUSE
+If any provision of this EULA is held to be void, invalid, unenforceable, or illegal, the other provisions shall continue in full force and effect. The invalid provision will be replaced by a valid one that comes closest to the economic purpose of the original provision.

@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SPCast Server\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Node Online"
+msgstr "Node Online"
+
+msgid "Active Streams"
+msgstr "Aktive Streams"
+
+msgid "Loading streams..."
+msgstr "Lade Streams..."
+
+msgid "No active streams on this node."
+msgstr "Keine aktiven Streams auf diesem Node."
+
+msgid "API connection failed."
+msgstr "API-Verbindung fehlgeschlagen."
+
+msgid "Live"
+msgstr "Live"
+
+msgid "Loading metadata..."
+msgstr "Lade Metadaten..."
+
+msgid "No title information"
+msgstr "Keine Titelinformationen"
+
+msgid "Player"
+msgstr "Player"
+
+msgid "Icecast UI"
+msgstr "Icecast UI"
+
+msgid "Connecting..."
+msgstr "Verbinde..."
+
+msgid "Live stream running"
+msgstr "Livestream läuft"
+
+msgid "Invalid channel ID format"
+msgstr "Ungültiges Channel-ID-Format"
+
+msgid "Invalid rendition ID format"
+msgstr "Ungültiges Rendition-ID Format"
+
+msgid "Unauthorized"
+msgstr "Nicht autorisiert"
+
+msgid "Only HTTP(S) protocols are allowed"
+msgstr "Es sind nur HTTP(S)-Protokolle erlaubt"
+
+msgid "Access to private/loopback IP ranges is forbidden"
+msgstr "Der Zugriff auf private/Loopback-IP-Bereiche ist verboten"
+
+msgid "Access to localhost is forbidden"
+msgstr "Der Zugriff auf Localhost ist verboten"
+
+msgid "Invalid host in URL"
+msgstr "Ungültiger Host in der URL"
+
+msgid "Unsafe FFmpeg input scheme"
+msgstr "Unsicheres FFmpeg-Eingabeschema"
+
+msgid "Invalid FFmpeg input URL"
+msgstr "Ungültige FFmpeg-Eingabe-URL"
+
+msgid "Missing Operator Information"
+msgstr "Fehlende Betreiberinformationen"
+
+msgid "The operator of this streaming node has not provided an imprint or a privacy policy. The operator details are unknown to us. We only provide the technical streaming software.<br><br><strong>For privacy questions regarding this radio, please contact the owner or provider of the radio station directly.</strong>"
+msgstr "Der Betreiber dieses Streaming-Knotens hat kein Impressum oder eine Datenschutzerklärung hinterlegt. Die Betreiberdetails sind uns nicht bekannt. Wir stellen lediglich die technische Streaming-Software zur Verfügung.<br><br><strong>Für Datenschutzfragen zu diesem Radio kontaktieren Sie bitte den Eigentümer oder Anbieter des Radiosenders direkt.</strong>"
+
+msgid "Server Logging (Logs)"
+msgstr "Server-Protokollierung (Logs)"
+
+msgid "Data Minimization Active"
+msgstr "Datenminimierung aktiv"
+
+msgid "Your IP address is anonymized before being stored in the server logs (Truncation Level {}). Direct identification is not possible."
+msgstr "Ihre IP-Adresse wird anonymisiert, bevor sie in den Server-Protokollen gespeichert wird (Verkürzungsstufe {}). Eine direkte Identifizierung ist nicht möglich."
+
+msgid "Full Logging Active"
+msgstr "Vollständige Protokollierung aktiv"
+
+msgid "Warning: Your IP address is stored unredacted and in full length in the server logs."
+msgstr "Warnung: Ihre IP-Adresse wird ungeschwärzt und in voller Länge in den Server-Protokollen gespeichert."
+
+msgid "IP address is truncated before transmission (Level {})."
+msgstr "IP-Adresse wird vor der Übertragung gekürzt (Stufe {})."
+
+msgid "IP address is transmitted fully and unredacted to Matomo."
+msgstr "IP-Adresse wird vollständig und ungeschwärzt an Matomo übertragen."
+
+msgid "IP address is transmitted fully to Google."
+msgstr "IP-Adresse wird vollständig an Google übertragen."
+
+msgid "No external tracking services active."
+msgstr "Keine externen Tracking-Dienste aktiv."
+
+msgid "Data Processing for Live Streams"
+msgstr "Datenverarbeitung für Live-Streams"
+
+msgid "Currently, no live streams are active. Therefore, no user-related stream processing occurs."
+msgstr "Aktuell sind keine Live-Streams aktiv. Daher findet keine benutzerbezogene Stream-Verarbeitung statt."
+
+msgid "Privacy Information"
+msgstr "Datenschutzinformationen"
+
+msgid "Transparent real-time overview of server-side data processing"
+msgstr "Transparente Echtzeit-Übersicht der serverseitigen Datenverarbeitung"
+
+msgid "This endpoint directly reads the current technical configuration of the streaming server."
+msgstr "Dieser Endpunkt liest direkt die aktuelle technische Konfiguration des Streaming-Servers aus."
+
+msgid "It allows you as an end user to verify without a doubt how your connection data is actually processed by this node at the moment."
+msgstr "Er ermöglicht es Ihnen als Endbenutzer, zweifelsfrei nachzuvollziehen, wie Ihre Verbindungsdaten von diesem Knotenpunkt aktuell tatsächlich verarbeitet werden."
+
+msgid "This page serves as an independent control body:"
+msgstr "Diese Seite dient als unabhängige Kontrollinstanz:"
+
+msgid "You can check here whether the operator of the radio station actually keeps the promises in practice that they state in their own privacy policy externally. The information displayed here reflects the unalterable, hard-coded technical truth of the system."
+msgstr "Sie können hier überprüfen, ob der Betreiber der Radiostation die Versprechen in der Praxis einhält, die er in seiner eigenen Datenschutzerklärung extern angibt. Die hier angezeigten Informationen spiegeln die unveränderliche, fest programmierte technische Wahrheit des Systems wider."
+
+msgid "Matomo Analytics:"
+msgstr "Matomo Analytics:"
+
+msgid "Google Analytics 4:"
+msgstr "Google Analytics 4:"
+
+msgid "Stream"
+msgstr "Stream"

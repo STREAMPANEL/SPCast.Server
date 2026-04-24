@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<streamserver config-version="2">
+
+    <global>
+        <hostname></hostname>
+        <radio-name>SPCast Media Edge</radio-name>
+        <logging level="debug" format="text" dir="./logs" max-size-mb="5" keep-files="5" privacy="yes" octave="2" />
+        <metrics enabled="false" bind="0.0.0.0:9100" path="/metrics" />
+        <admin enabled="true" bind="127.0.0.1:9000" max-clients-list="100" username="admin" password="securepassword" />
+        <client user-agent="SPCast.eu / HP-Media-Delivery-Node" />
+        <analytics global="false" />
+        <history enabled="true" default-limit="10" max-limit="25" />
+        <language auto-detect="false" default="en" />
+        <limits />
+        <footer>
+            <privacy url="" />
+            <imprint url="" />
+            <custom name="Custom 1" url="" />
+            <custom name="Custom 2" url="" />
+            <custom name="Custom 3" url="" />
+        </footer>
+    </global>
+
+    <storage>
+        <segments type="memory-ring" max-bytes="2147483648" />
+    </storage>
+
+    <auth>
+        <acl>
+            <rule path="/hls/" allow="public" />
+            <rule path="/dash/" allow="public" />
+        </acl>
+        <limits>
+            <max-connections-per-ip value="10" />
+            <max-viewers-default value="100" />
+        </limits>
+    </auth>
+
+    <services>
+        <delivery>
+            <http enabled="true" bind="0.0.0.0:8080" start-page="/main.html">
+                <headers>
+                    <header name="Access-Control-Allow-Origin" value="*" />
+                    <header name="Access-Control-Allow-Methods" value="GET, OPTIONS" />
+                </headers>
+                <ssl enabled="false" cert="/etc/letsencrypt/live/domain.com/fullchain.pem" key="/etc/letsencrypt/live/domain.com/privkey.pem" />
+                <static enabled="true" path="./web" not-found="404.html" />
+            </http>
+        </delivery>
+    </services>
+
+    <presets>
+        <preset id="live-default">
+            <segmenting mode="cmaf">
+                <hls enabled="true" segment="4s" window="8" />
+                <dash enabled="true" segment="4s" window="8" />
+            </segmenting>
+        </preset>
+    </presets>
+
+    <channels>
+        <channel id="test_channel" preset="live-default" enabled="true">
+            <inputs>
+                <icecast bind="0.0.0.0:8000" mount="/live" username="admin" password="securepassword" prebuffer_bytes="0" seamless-takeover="false" />
+                <shoutcast bind="0.0.0.0:8001" mount="/live" username="admin" password="securepassword" prebuffer_bytes="16384" seamless-takeover="false" />
+                <srt bind="0.0.0.0:9001" passphrase="mysecretstream" username="admin" password="securepassword" />
+            </inputs>
+            <outputs>
+                <hls path="live1" />
+                <dash enabled="false" path="live1" />
+                <mp3 enabled="false" preload-segments="6" burst-bytes="524288" />
+                <aac enabled="false" preload-segments="3" burst-bytes="524288" />
+                <opus enabled="false" preload-segments="4" burst-bytes="524288" />
+                <video enabled="true" hls-time="2" hls-list-size="3" />
+            </outputs>
+            <fallback path="./fallback.mp3" />
+            <icy mode="auto" />
+            <webhooks>
+                <webhook enabled="false" url="https://discord.com/api/webhooks/YOUR_ID/YOUR_TOKEN" events="all" />
+            </webhooks>
+            <analytics />
+            <yp>
+                <directory enabled="false" url="http://dir.xiph.org/cgi-bin/yp-cgi">
+                    <entry
+                        name="spcast.eu/en/server"
+                        desc="This is a test Broadcast of SPCast Server"
+                        genre="misc"
+                        url="https://www.spcast.eu/en/server/"
+                        listenurl="https://stream.yourdomain.com/live.mp3"
+                        bitrate="128"
+                        type="audio/mpeg"
+                        cluster-password="optional"
+                    />
+                </directory>
+            </yp>
+            <player enabled="true">
+                <radio-name>SPCast Radio</radio-name>
+                <description>The best Radio on the internet streaming globally!</description>
+                <logo-url>https://example.com/logo.png</logo-url>
+                <background-url>https://example.com/bg.jpg</background-url>
+                <favicon-url>https://example.com/favicon.png</favicon-url>
+                <no-cover-url>https://example.com/nocover.png</no-cover-url>
+                <custom-html><![CDATA[<a href="https://example.com">More Info</a>]]></custom-html>
+            </player>
+        </channel>
+
+        <channel id="event_stream" preset="live-default" enabled="false">
+            <outputs>
+                <hls path="live2" />
+                <dash enabled="false" path="live2" />
+            </outputs>
+        </channel>
+    </channels>
+
+</streamserver>

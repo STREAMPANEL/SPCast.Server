@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  SPCast Media Edge - Full Example Configuration
+  
+  This configuration file contains all available options for the streaming server 
+  along with documentation. The file is read during server startup (default "config.xml"). 
+  Parts of this configuration can be dynamically reloaded via the Admin REST API (Hot-Reload).
+-->
+<streamserver config-version="2">
+
+    <!-- 
+      GLOBAL SETTINGS 
+      General server settings for logging, metrics, and the admin API.
+    -->
+    <global>
+        <!-- 
+          hostname: Optional. Used to generate absolute URLs (like YP directory ListenURLs).
+          If empty, the server automatically finds its own internet route IP (e.g. 46.88.10.55).
+        -->
+        <hostname></hostname>
+
+        <!-- 
+          radio-name: Optional. The global name of your generic server node. Appears in the Dashboard <title>.
+          description: Optional. SEO-friendly meta description for the server landing page. If omitted, search engines will auto-generate it.
+        -->
+        <radio-name>SPCast Media Edge</radio-name>
+
+        <!-- 
+          logging: Controls the console output of the server.
+          @level (debug|info|warn|error): Log detail level. Default: info
+          @format (text|json): Output format (important for log aggregators).
+          @dir: The folder where the log files (access.log & error.log) will be written to.
+          @max-size-mb: Maximum size per log file before rotation.
+          @keep-files: Maximum number of rotated files to retain.
+          @privacy: "yes" to anonymize IP addresses in the log files, "no" to write full IPs. (Default: "yes")
+          @octave: How much of the IP to mask. "1" (e.g. 127.0.0.*) or "2" (e.g. 127.0.*.*). (Default: 2)
+        -->
+        <logging level="debug" format="text" dir="./logs" max-size-mb="5" keep-files="5" privacy="yes" octave="2" />
+
+        <!-- 
+          metrics: Prometheus-compatible endpoint for system metrics (CPU, RAM, Connections).
+          @enabled (true|false): Activates the metrics server
+          @bind: Network interface and port for the scraper (e.g. Prometheus)
+          @path: URL path for retrieval
+        -->
+        <metrics enabled="false" bind="0.0.0.0:9100" path="/metrics" />
+
+        <!-- 
+          admin: The internal API for server control (Hot-Reload, Channel Status, Ingest Starts).
+          IMPORTANT: This should never be exposed to the public internet in production!
+          @bind: Interface and port (e.g. 127.0.0.1 for local access only)
+          @max-clients-list: Limits the amount of synthetic listeners shown to Icecast broadcasters (e.g. RadioBOSS).
+                             Note: In Unlicensed Mode, this is strictly capped to a maximum of 100.
+          @username: Optional. HTTP Basic Auth username to protect the admin routes.
+          @password: Optional. HTTP Basic Auth password to protect the admin routes.
+        -->
+        <admin enabled="true" bind="127.0.0.1:9000" max-clients-list="100" username="admin" password="securepassword" />
+
+        <!-- 
+          client: Configurations for HTTP requests going outbound from this server.
+          @user-agent: The HTTP User-Agent string to use for pull ingests.
+                       Note: Customizing the user-agent requires a valid SPCast License. 
+                       Unlicensed instances will safely fall back to the default agent.
+        -->
+        <client user-agent="SPCast.eu / HP-Media-Delivery-Node" />
+
+        <!-- 
+          analytics: Global Server-Side Tracking Configuration (Google GA4 & Matomo).
+          @global: If "true", these global settings will be forced for ALL channels, ignoring individual channel settings.
+                   If "false", this section is ignored, and each channel can define its own <analytics> block.
+        -->
+        <analytics global="false">
+            <!-- 
+              matomo: Matomo Analytics.
+              Tracks views to the Matomo HTTP Tracking API.
+              @url: The tracking endpoint (e.g. "https://matomo.example.com/matomo.php").
+              @site-id: The ID of the website in your Matomo dashboard.
+              @privacy: "yes" to anonymize IP addresses, "no" to send full IPs. (Default: "yes")
+              @octave: How much of the IP to mask. "1" (e.g. 127.0.0.*) or "2" (e.g. 127.0.*.*). (Default: 2)
+            -->
+            <!-- <matomo url="https://matomo.domain.com/matomo.php" site-id="1" privacy="yes" octave="2" /> -->
+
+            <!-- 
+              ga4: Google Analytics 4 Measurement Protocol.
+              Sends events directly to Google Analytics servers.
+              @measurement-id: Your stream's Measurement ID (e.g. "G-XXXXXXXXXX").
+              @api-secret: The API Secret generated in the GA4 Data Streams > Measurement Protocol API secrets.
+              @privacy: "yes" to anonymize IP addresses, "no" to send full IPs. (Default: "yes")
+              @octave: How much of the IP to mask. "1" (e.g. 127.0.0.*) or "2" (e.g. 127.0.*.*). (Default: 2)
+            -->
+            <!-- <ga4 measurement-id="G-12345XYZ" api-secret="YourSecretKeyHere" privacy="yes" octave="2" /> -->
+        </analytics>
+
+        <!--
+          history: Metadata History API. Remember and serve the last X played songs per channel.
+          This enables the GET /api/{channel_id}/history endpoint.
+          @enabled: "true" to enable history tracking.
+          @default-limit: Default amount of history entries returned if no limit is specified.
+          @max-limit: Maximum amount of history entries that can be requested or stored in RAM.
+        -->
+        <history enabled="true" default-limit="10" max-limit="25" />
+
+        <!--
+          language: Configurable Multi-Language-System (based on .po files in the lang/ directory).
+          @auto-detect: "true" (Default) attempts to detect the correct language based on the browser's Accept-Language header.
+                        URL Parameters like ?lang=x always have the highest priority.
+          @default: Fallback language in case no match is found, or the .po file is missing.
+        -->
+        <language auto-detect="false" default="en" />
+
+        <!--
+          preroll: Play an introductory audio file (Intro) once before delivering the live stream.
+          This can be set globally here, or overridden per channel in the <channel> block.
+          @path: The file path to the audio file. Can be an absolute path (e.g. "C:\audio\intro.mp3") 
+                 or a relative path from the server's working directory (e.g. "./intro.mp3").
+        -->
+        <!-- <preroll path="./intro.mp3" /> -->
+
+        <!--
+          limits: Global session limits for viewers.
+          Note: All limit types (max-session-duration, max-connections-per-ip, 
+          max-viewers-default) can be defined here, inside <auth>, or per <channel>.
+          
+          LICENSE LIMITATION: Without a valid SPCast Media Edge License, the absolute global viewer 
+          limit across the entire server is strictly enforced at 100 concurrent listeners, 
+          regardless of the higher limits you might configure here.
+        -->
+        <limits>
+            <!-- Disconnects a listener after a certain amount of seconds. 0 to disable. -->
+            <!-- <max-session-duration value="3600" /> -->
+        </limits>
+        <!--
+          footer: Customizable footer displayed on the HTML web interface (index.html, Audio Player UI, Privacy Endpoint).
+          Configure links to Dataprotection, Imprint, and up to 3 custom URLs.
+          Privacy and Imprint are mandatory to ensure your listeners can identify the node operator and read the privacy policy.
+        -->
+        <footer>
+            <privacy url="" />
+            <imprint url="" />
+            <!-- Up to 3 custom links are supported in the frontend block -->
+            <custom name="Custom 1" url="" />
+            <custom name="Custom 2" url="" />
+            <custom name="Custom 3" url="" />
+        </footer>
+
+    </global>
+
+    <!-- 
+      STORAGE SETTINGS 
+      Configures the primary in-memory ring buffer (RAM) for live segments.
+    -->
+    <storage>
+        <!-- 
+          segments: The RAM-based Segment Store.
+          @type: "memory-ring" (Default for Live-Streaming HLS/DASH).
+          @max-bytes: Maximum RAM usage for all buffered segments combined (e.g. 2147483648 for 2GB).
+                      When the limit is reached, the oldest segments are immediately offloaded to disk (Disk Spooling / DVR).
+        -->
+        <segments type="memory-ring" max-bytes="2147483648" />
+    </storage>
+
+    <!-- 
+      AUTH & LIMITS 
+      Access controls and IP limitations for viewers.
+      (These values can be updated immediately via Hot-Reload)
+    -->
+    <auth>
+        <!-- Access Control List for HTTP Routes -->
+        <acl>
+            <!-- 
+              Allows access (public/private) for specific prefixes.
+              Here: HLS Master/Media Playlists and MP4 segments are public.
+            -->
+            <rule path="/hls/" allow="public" />
+            <rule path="/dash/" allow="public" />
+        </acl>
+
+        <limits>
+            <!-- Prevents DDoS or connection spam from a single IP.
+                 @value: Keep it high to allow multiple devices (e.g. phone, tablet, smart tv) 
+                         connected to the same router (same public IP) to listen simultaneously.
+                 Note: All limit types (max-session-duration, max-connections-per-ip, 
+                 max-viewers-default) can be defined here, inside <auth>, or per <channel>.
+            -->
+            <max-connections-per-ip value="10" />
+            
+            <!-- Global soft-limit for concurrent active viewers across all channels.
+                 Note: Without a valid license, this cannot exceed 100. -->
+            <max-viewers-default value="100" />
+        </limits>
+    </auth>
+
+    <!-- 
+      SERVICES 
+      Activates the externally visible protocols/services.
+    -->
+    <services>
+        <delivery>
+            <!-- 
+              http: The engine port where viewers fetch the manifests (.m3u8, .mpd)
+              and segments (.m4s, .mp4). 
+              This is the port that is often placed behind a CDN (Nginx/Cloudflare).
+              @start-page: Optional. Set the default start page for the root domain "/".
+                           Change it to "/player.html" for a single-channel player or any external URL.
+            -->
+            <http enabled="true" bind="0.0.0.0:8080" start-page="/main.html">
+                <!-- 
+                  headers: Custom HTTP headers injected into every delivery response. 
+                  Crucial for CORS (Cross-Origin Resource Sharing) so HTML5 Web-Players 
+                  (like hls.js or video.js) hosted on your main domain can play the streams.
+                -->
+                <headers>
+                    <header name="Access-Control-Allow-Origin" value="*" />
+                    <header name="Access-Control-Allow-Methods" value="GET, OPTIONS" />
+                </headers>
+
+                <!-- 
+                  ssl: Native TLS termination. If enabled, the server will serve HTTPS directly.
+                  For production, deploying a Reverse Proxy (like Nginx/HAProxy) is often preferred,
+                  but native SSL is supported for simple deployments.
+                -->
+                <ssl enabled="false" cert="/etc/letsencrypt/live/domain.com/fullchain.pem" key="/etc/letsencrypt/live/domain.com/privkey.pem" />
+
+                <!-- 
+                  static: Simple Static File Server. 
+                  Serves files from a local directory (e.g. your HTML5 web player, .pls, or .asx files).
+                  @not-found: The file to serve if a route isn't matched (e.g. a custom 404 page).
+                -->
+                <static enabled="true" path="./web" not-found="404.html" />
+            </http>
+
+            <!-- 
+              standard-web: A simple switch to automatically bind the standard web ports 80 (HTTP) 
+              and 443 (HTTPS) in addition to the primary <http> port (e.g. 8080). 
+              This copies the CORS headers and static file settings from the first configured <http> block.
+              WARNING: On Linux/macOS, ports below 1024 require root privileges or special capabilities (setcap).
+            -->
+            <!--
+            <standard-web enabled="true" bind-ip="0.0.0.0" ssl-cert="/etc/letsencrypt/live/domain.com/fullchain.pem" ssl-key="/etc/letsencrypt/live/domain.com/privkey.pem" />
+            -->
+        </delivery>
+    </services>
+
+    <!-- 
+      PRESETS 
+      Templates for pipeline generation. Channels reference these presets 
+      to avoid repetition in the configuration.
+      (Changes here require a Hot-Reload.)
+    -->
+    <presets>
+        <preset id="live-default">
+            <!-- 
+              segmenting: How the audio/video stream should be packaged.
+              @mode: "cmaf" (Common Media Application Format). Isolates MP4 fragments for use in both HLS AND DASH.
+            -->
+            <segmenting mode="cmaf">
+                <!-- 
+                  hls: Configuration for Apple HTTP Live Streaming
+                  @segment: Segment duration (e.g. "4s" for 4 seconds per chunk)
+                            - Lower values (e.g. "2s") reduce latency but increase HTTP request overhead.
+                            - Higher values (e.g. "6s") increase stability but add significant delay.
+                  @window: Maximum number of segments kept live in the .m3u8 list.
+                           (e.g. 8 segments * 4s = 32 seconds of retrievable live DVR buffer).
+                           Note: HLS Players typically start playback 3 segments behind the live edge.
+                           For 10s latency: segment="3s" window="5"
+                           For 20s latency: segment="6s" window="8"
+                           For 30s latency: segment="10s" window="8"
+                -->
+                <hls enabled="true" segment="4s" window="8" />
+                
+                <!-- 
+                  dash: Configuration for MPEG-DASH
+                  @segment & @window have the same meaning as with HLS.
+                -->
+                <dash enabled="true" segment="4s" window="8" />
+            </segmenting>
+        </preset>
+    </presets>
+
+    <!-- 
+      CHANNELS 
+      The explicit definition of live channels running on this server.
+    -->
+    <channels>
+        <!-- 
+          channel: A stream (e.g. an e-sports event or a 24/7 TV station).
+          @id: Unique internal naming used in the URL (e.g. http://.../hls/sports-1/...)
+          @preset: The preset (see above) which defines segmentation parameters.
+          @enabled: Can be set to "false" via Hot-Reload to immediately kill the channel.
+        -->
+        <channel id="test_channel" preset="live-default" enabled="true">
+            <!-- 
+              inputs: How the live stream enters the server. 
+              You can configure multiple inputs for fallback, but usually one is active.
+            -->
+            <inputs>
+                <!-- 
+                  icecast: Emulates an Icecast server. 
+                  Enables classic encoders like SAM Broadcaster, mAirList, or RadioBOSS to connect.
+                  They will connect to this bind address and send a SOURCE request.
+                  You can set a global password, or define specific users with <auth>.
+                  You can optionally secure the mount with a master username.
+                  @prebuffer_bytes: Delays FFmpeg start until N bytes are received to prevent encoder startup stutter.
+                  @seamless-takeover: If "true", a new encoder connecting will instantly kick the existing one instead of being rejected.
+                -->
+                <icecast bind="0.0.0.0:8000" mount="/live" username="admin" password="securepassword" prebuffer_bytes="0" seamless-takeover="false">
+                    <!-- Optional: Multiple users per mount with strict matching -->
+                    <!-- 
+                    <auth username="dj1" password="dj1password" />
+                    <auth username="dj2" password="dj2password" /> 
+                    -->
+                </icecast>
+                
+                <!-- 
+                  shoutcast: Emulates a Shoutcast v2 and v1 server.
+                  Uses Icecast-compatible protocol behavior under the hood for v2.
+                  For Shoutcast v1 (legacy) encoders, you can optionally define a username
+                  so they can authenticate via "username:password" if your encoder supports it.
+                  Like icecast, you can define multiple users with <auth>.
+                  @prebuffer_bytes: 16384 bytes (~1s) recommended for Shoutcast to stabilize startup segments.
+                  @seamless-takeover: If "true", a new encoder connecting will instantly kick the existing one.
+                -->
+                <shoutcast bind="0.0.0.0:8001" mount="/live" username="admin" password="securepassword" prebuffer_bytes="16384" seamless-takeover="false">
+                    <!-- Optional: Multiple users per mount with strict matching -->
+                    <!-- 
+                    <auth username="dj3" password="dj3password" /> 
+                    <auth username="dj4" password="dj4password" /> 
+                    -->
+                </shoutcast>
+                
+                <!-- 
+                  srt: Secure Reliable Transport.
+                  Highly recommended for unstable connections (e.g. 4G/LTE IRL backpacks, remote stadiums).
+                  Natively encrypted, much more resilient against packet loss than RTMP.
+                  The recommended ingest protocol for all new setups.
+                  Since SRT doesn't have a native username/password field in OBS, enter it in the Stream ID field:
+                  `streamid=username:password@channel_id`
+                  You can set a global password, or define specific users with <auth>.
+                  Example: `srt://IP:9001?streamid=admin:securepassword@test_channel&passphrase=mysecretstream&pbkeylen=16`
+                -->
+                <srt bind="0.0.0.0:9001" passphrase="mysecretstream" username="admin" password="securepassword">
+                    <!-- Optional: Multiple users with strict matching -->
+                    <!-- 
+                    <auth username="dj7" password="dj7password" />
+                    <auth username="dj8" password="dj8password" />
+                    -->
+                </srt>
+                
+                <!-- 
+                  pull: Fetches an existing stream from another server. (Also known as Relaying)
+                  Useful for restreaming or proxying an external source.
+                -->
+                <!-- <pull url="http://remote-server.com/stream.m3u8" /> -->
+            </inputs>
+
+            <!-- 
+              outputs: Where (virtually in the store) the stream is generated and accessible.
+              The output paths shape the final URL. FFMPEG is used to generate the stream and must be installed on the server.
+            -->
+            <outputs>
+                <hls path="live1" />
+                <!-- 
+                  dash: MPEG-DASH Streaming.
+                  Warning: Unlike HLS (which is zero-CPU), enabling DASH requires FFmpeg
+                  to repackage the stream into fragmented MP4 (.m4s) onto your disk.
+                  This WILL consume CPU cycles and cause continuous Disk I/O.
+                -->
+                <dash enabled="false" path="live1" />
+                <!-- 
+                  Generic Audio Stream Endpoints (Icecast / HTTP Streams).
+                  Dynamic behavior:
+                  - If the broadcaster sends MP3, the MP3 stream is ALWAYS available (Zero-CPU Passthrough), even if disabled here.
+                  - If the broadcaster sends AAC, the AAC stream is ALWAYS available (Zero-CPU Passthrough), even if disabled here.
+                  - If you set a different format to `enabled="true"` (e.g. Broadcaster sends MP3, but you enable AAC), 
+                    the server will spawn FFmpeg to actively transcode the stream in real-time (consumes CPU).
+                    
+                  @preload-segments: Forces transcoded streams to sync with a delay to hide jitter (default 6 segments).
+                  @burst-bytes: For Zero-CPU Passthrough streams ONLY! 
+                                Pre-fills the client's playback buffer with N bytes instantly on connect.
+                                Typical browsers require ~150-250KB to start playing. Set to 524288 (512KB) 
+                                for instant playback on Edge/Chrome/Firefox, especially for high-bitrate 
+                                320 kbps streams.
+                -->
+                <mp3 enabled="false" preload-segments="6" burst-bytes="524288" />
+                <aac enabled="false" preload-segments="3" burst-bytes="524288" />
+                <opus enabled="false" preload-segments="4" burst-bytes="524288" />
+                <!-- 
+                  Video configuration (used primarily by SRT inputs).
+                  WARNING: Setting `hls-time` below 2 seconds or `hls-list-size` below 3 segments brings latency incredibly close to real-time (1-3s), but massively increases the risk of buffering/instability on weak connections.
+                  OBS KEYFRAME INTERVAL: Your OBS "Keyframe Interval" MUST be set realistically to match or divide evenly into `hls-time`.
+                  - If `hls-time="1"`, set OBS Keyframe Interval to `1 s`.
+                  - If `hls-time="2"`, set OBS Keyframe Interval to `2 s` (OBS default).
+                -->
+                <video enabled="true" hls-time="2" hls-list-size="3" />
+            </outputs>
+            
+            <!-- 
+              Optional: Fallback audio played when the input stream disconnects.
+              @path: The file path to the audio file. Can be an absolute path (e.g. "C:\audio\fallback.mp3") 
+                     or relative to the server working directory (e.g. "./fallback.mp3").
+            -->
+            <fallback path="./fallback.mp3" />
+
+            <!-- 
+              Optional: Preroll audio played for this specific channel.
+              @path: The file path. Same absolute/relative rule applies here.
+            -->
+            <!-- <preroll path="./intro.mp3" /> -->
+
+            <!-- Optional: Override global session limits for this specific channel -->
+            <!-- 
+            <limits>
+                <max-session-duration value="3600" />
+            </limits> 
+            -->
+
+            <!-- 
+              Icy Headers Configuration (Optional)
+              Controls how icy-* headers (like Station Name, Genre) from the broadcaster are forwarded to listeners on the audio streams (MP3/AAC/OPUS).
+              @mode: 
+                - "auto"    : (Default) Forward all icy-* headers sent by the broadcaster.
+                - "manual"  : Only send the custom headers defined below.
+                - "mixed"   : Forward auto headers, but overwrite/append with manual headers below.
+                - "disabled": Do not send any icy-* headers.
+            -->
+            <icy mode="auto">
+                <!-- Example: Override or add manual headers (useful in "manual" or "mixed" modes) -->
+                <!-- <header name="icy-name" value="My Awesome Radio" /> -->
+                <!-- <header name="icy-url" value="https://example.com" /> -->
+            </icy>
+
+            <!-- 
+              Webhooks for external services (e.g. Discord, Slack)
+              The server sends a JSON payload compatible with Discord's Webhook format!
+              
+              Available Events:
+              - "all" : Fires on any of the events below.
+              - "live" : Fired when the stream source connects (e.g., OBS or RadioBOSS starts streaming).
+              - "offline" : Fired when the stream source disconnects.
+              - "metadata" : Fired when the stream title updates (e.g. from RadioBOSS GET /admin).
+              - "server_start" : Fired once when the SPCast Server boots up globally.
+              - "server_stop" : Fired once when the SPCast Server shuts down globally.
+            -->
+            <webhooks>
+                <!-- Example: Send all events to this Discord Webhook -->
+                <webhook enabled="false" url="https://discord.com/api/webhooks/YOUR_ID/YOUR_TOKEN" events="all" />
+                
+                <!-- Example: Send ONLY metadata updates to another Webhook -->
+                <!-- <webhook enabled="false" url="https://discord.com/api/webhooks/ANOTHER_ID/TOKEN" events="metadata" /> -->
+            </webhooks>
+
+            <!-- 
+              analytics: Channel-specific Server-Side Tracking (Google GA4 & Matomo).
+              Active ONLY IF the <analytics> section in <global> has global="false" (which is default).
+              This allows you to assign different GA4/Matomo properties to different channels.
+            -->
+            <analytics>
+                <!-- <matomo url="https://matomo.domain.com/matomo.php" site-id="2" privacy="yes" octave="2" /> -->
+                <!-- <ga4 measurement-id="G-CHANNELXYZ" api-secret="ChannelSecretKeyHere" privacy="yes" octave="2" /> -->
+            </analytics>
+
+            <!-- 
+              yp: Yellow Pages Directory Registration (Icecast YP v2).
+              Integration based on: https://wiki.xiph.org/Icecast_Server/YP-protocol-v2
+              Registers this stream to public directories like dir.xiph.org so people can find your station.
+              Requires the stream to be publicly accessible (check your firewall/port forwarding).
+            -->
+            <!-- Optional: YP Directory Registration for this channel -->
+            <yp>
+                <!--
+                  To register with the xiph directory, use url="http://dir.xiph.org/cgi-bin/yp-cgi"
+                  Cluster password is required for registration on private YP networks.
+                -->
+                <directory enabled="false" url="http://dir.xiph.org/cgi-bin/yp-cgi">
+                    <entry 
+                        name="spcast.eu/en/server" 
+                        desc="This is a test Broadcast of SPCast Server"
+                        genre="misc"
+                        url="https://www.spcast.eu/en/server/"
+                        listenurl="https://stream.yourdomain.com/live.mp3"
+                        bitrate="128"
+                        type="audio/mpeg"
+                        cluster-password="optional"
+                    />
+                </directory>
+            </yp>
+
+            <!-- 
+              player: HTML5 Web Player Configuration for /player.html
+              Configures the metadata, logo, and artwork for the built-in modern player.
+              If a user visits /player.html without a channel query parameter, the server
+              defaults to the first channel's player configuration. Make sure to use absolute or relative paths.
+            -->
+            <player enabled="true">
+                <radio-name>SPCast Radio</radio-name>
+                <description>The best Radio on the internet streaming globally!</description>
+                <logo-url>https://example.com/logo.png</logo-url>
+                <background-url>https://example.com/bg.jpg</background-url>
+                <favicon-url>https://example.com/favicon.png</favicon-url>
+                <no-cover-url>https://example.com/nocover.png</no-cover-url>
+                <!-- Optional: Insert raw custom HTML (like external links) into the player -->
+                <custom-html><![CDATA[<a href="https://example.com">More Info</a>]]></custom-html>
+            </player>
+        </channel>
+
+        <!-- Another channel, currently disabled. -->
+        <channel id="event_stream" preset="live-default" enabled="false">
+            <outputs>
+                <hls path="live2" />
+                <dash enabled="false" path="live2" />
+            </outputs>
+        </channel>
+    </channels>
+
+</streamserver>

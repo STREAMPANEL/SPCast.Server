@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SPCast Server\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Node Online"
+msgstr ""
+
+msgid "Active Streams"
+msgstr ""
+
+msgid "Loading streams..."
+msgstr ""
+
+msgid "No active streams on this node."
+msgstr ""
+
+msgid "API connection failed."
+msgstr ""
+
+msgid "Live"
+msgstr ""
+
+msgid "Loading metadata..."
+msgstr ""
+
+msgid "No title information"
+msgstr ""
+
+msgid "Player"
+msgstr ""
+
+msgid "Icecast UI"
+msgstr ""
+
+msgid "Connecting..."
+msgstr ""
+
+msgid "Live stream running"
+msgstr ""
+
+msgid "Invalid channel ID format"
+msgstr ""
+
+msgid "Invalid rendition ID format"
+msgstr ""
+
+msgid "Unauthorized"
+msgstr ""
+
+msgid "Only HTTP(S) protocols are allowed"
+msgstr ""
+
+msgid "Access to private/loopback IP ranges is forbidden"
+msgstr ""
+
+msgid "Access to localhost is forbidden"
+msgstr ""
+
+msgid "Invalid host in URL"
+msgstr ""
+
+msgid "Unsafe FFmpeg input scheme"
+msgstr ""
+
+msgid "Invalid FFmpeg input URL"
+msgstr ""
+
+msgid "Missing Operator Information"
+msgstr ""
+
+msgid "The operator of this streaming node has not provided an imprint or a privacy policy. The operator details are unknown to us. We only provide the technical streaming software.<br><br><strong>For privacy questions regarding this radio, please contact the owner or provider of the radio station directly.</strong>"
+msgstr ""
+
+msgid "Server Logging (Logs)"
+msgstr ""
+
+msgid "Data Minimization Active"
+msgstr ""
+
+msgid "Your IP address is anonymized before being stored in the server logs (Truncation Level {}). Direct identification is not possible."
+msgstr ""
+
+msgid "Full Logging Active"
+msgstr ""
+
+msgid "Warning: Your IP address is stored unredacted and in full length in the server logs."
+msgstr ""
+
+msgid "IP address is truncated before transmission (Level {})."
+msgstr ""
+
+msgid "IP address is transmitted fully and unredacted to Matomo."
+msgstr ""
+
+msgid "IP address is transmitted fully to Google."
+msgstr ""
+
+msgid "No external tracking services active."
+msgstr ""
+
+msgid "Data Processing for Live Streams"
+msgstr ""
+
+msgid "Currently, no live streams are active. Therefore, no user-related stream processing occurs."
+msgstr ""
+
+msgid "Privacy Information"
+msgstr ""
+
+msgid "Transparent real-time overview of server-side data processing"
+msgstr ""
+
+msgid "This endpoint directly reads the current technical configuration of the streaming server."
+msgstr ""
+
+msgid "It allows you as an end user to verify without a doubt how your connection data is actually processed by this node at the moment."
+msgstr ""
+
+msgid "This page serves as an independent control body:"
+msgstr ""
+
+msgid "You can check here whether the operator of the radio station actually keeps the promises in practice that they state in their own privacy policy externally. The information displayed here reflects the unalterable, hard-coded technical truth of the system."
+msgstr ""
+
+msgid "Matomo Analytics:"
+msgstr ""
+
+msgid "Google Analytics 4:"
+msgstr ""
+
+msgid "Stream"
+msgstr ""
