@@ -6,7 +6,7 @@
         <radio-name>SPCast Media Edge</radio-name>
         <logging level="debug" format="text" dir="./logs" max-size-mb="5" keep-files="5" privacy="yes" octave="2" />
         <metrics enabled="false" bind="0.0.0.0:9100" path="/metrics" />
-        <admin enabled="true" bind="127.0.0.1:9000" max-clients-list="100" username="admin" password="securepassword" />
+        <admin enabled="true" bind="127.0.0.1:9090" max-clients-list="100" username="admin" password="securepassword" />
         <client user-agent="SPCast.eu / HP-Media-Delivery-Node" />
         <analytics global="false" />
         <history enabled="true" default-limit="10" max-limit="25" />

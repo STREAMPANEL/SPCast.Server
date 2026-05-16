@@ -23,14 +23,18 @@ Inside this directory, you will find the final production structure:
 
 ## 2. Configuration
 
-The server requires a `config.xml` file in its **working directory** (the folder from which you launch the server) to launch correctly. The server will create a default `config.xml` if none is found, but it is recommended to use one of the example configurations from the `config/` directory.
+The server requires a `config.xml` file in its **working directory** (the folder from which you launch the server) to launch correctly. On first launch, the server automatically provisions all required runtime files:
+
+* **`config.xml`** - If no configuration file is found, the server creates a default `config.xml` based on the built-in minimal example configuration. You can also manually copy one of the example configurations from the `config/` directory.
+* **`web/`** - The server extracts embedded web assets (404 page, HLS player JavaScript, override templates) into the `web/` directory. Existing files are never overwritten, so your customisations are preserved.
+* **`lang/`** - Translation files are automatically extracted on first launch (see the `lang/override/` directory for customisation options).
 
 1. Copy one of the example configurations from the `config/` directory into the root `SPCast.Server` directory.
    ```bash
    cp config/full_config_example.xml ./config.xml
    ```
 2. Open the new `config.xml` with your favorite text editor and customize it to your needs. The default configuration exposes:
-   * **Admin API** on `127.0.0.1:9000` (Localhost only, which is safe).
+   * **Admin API** on `127.0.0.1:9090` (Localhost only, which is safe).
    * **Delivery Engine** on `0.0.0.0:8080` (Where viewers connect).
    * **Metrics** on `0.0.0.0:9100`.
 
@@ -117,12 +121,12 @@ Once running, you can verify the systems are online using curl (or by opening th
 
 **Get the server health:**
 ```bash
-curl http://127.0.0.1:9000/admin/health
+curl http://127.0.0.1:9090/admin/health
 ```
 
 **List the configured channels:**
 ```bash
-curl http://127.0.0.1:9000/admin/channels
+curl http://127.0.0.1:9090/admin/channels
 ```
 
 The delivery node will be active on port `8080` (or whatever you configured in the `config.xml`). To test viewing, you can open `http://<your-server-ip>:8080/main.html` in your browser to see the integrated Web-Player.

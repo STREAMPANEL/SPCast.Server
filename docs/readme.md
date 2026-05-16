@@ -5,7 +5,7 @@ Welcome to the central documentation for **SPCast Media Edge**. This document pr
 ## 1. Architectural Philosophy
 
 SPCast Media Edge is a high-performance, modern streaming edge server built entirely from the ground up in **100% pure Rust**. 
-It is engineered for extreme efficiency—designed to run close to the metal with near-zero CPU footprint on idle and minimal resource utilization even under heavy load.
+It is engineered for extreme efficiency designed to run close to the metal with near-zero CPU footprint on idle and minimal resource utilization even under heavy load.
 
 - **Zero System Dependencies:** The core routing and connection handling operates completely stand-alone. No external web servers (like Nginx/Apache) or background runtimes are strictly required for standard operations.
 - **Zero-CPU Passthrough:** When receiving audio formats like MP3 or AAC directly from a broadcaster, the server securely routes the packets directly to connected listeners without transcoding. This consumes virtually no CPU.

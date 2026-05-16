@@ -57,7 +57,7 @@ Falls back to files placed in the configured `./web` directory (if `<static enab
 > **This API must never be exposed to the public internet.** Bind it to `127.0.0.1` only.
 > All endpoints require HTTP Basic Authentication (configured via `<admin username="..." password="...">` in `config.xml`).
 
-Base URL: `http://127.0.0.1:9000`
+Base URL: `http://127.0.0.1:9090`
 
 ### System
 
@@ -81,15 +81,15 @@ Base URL: `http://127.0.0.1:9000`
 |---|---|---|---|
 | `POST` | `/admin/channels/{id}/ingest/pull/start` | `{"url": "http://..."}` | Starts an HTTP Pull ingest for the given channel. The URL is validated against SSRF rules before connecting. |
 | `POST` | `/admin/channels/{id}/ingest/srt/start` | `{"bind_addr": "0.0.0.0:9001"}` | Starts an SRT listener ingest for the given channel. |
-| `POST` | `/admin/channels/{id}/ingest/stop` | — | Stops any running ingest pipeline for the given channel. |
-| `GET` | `/admin/channels/{id}/ingest/status` | — | Returns ingest statistics for a channel (bytes received, reconnect count, last error). |
+| `POST` | `/admin/channels/{id}/ingest/stop` | - | Stops any running ingest pipeline for the given channel. |
+| `GET` | `/admin/channels/{id}/ingest/status` | - | Returns ingest statistics for a channel (bytes received, reconnect count, last error). |
 
 ### Recording
 
 | Method | Path | Body (JSON) | Description |
 |---|---|---|---|
 | `POST` | `/admin/channels/{id}/record/start` | `{"ttl_secs": 3600, "max_bytes": 1073741824}` | Starts a DVR recording session for the given channel with the specified retention policy. |
-| `POST` | `/admin/channels/{id}/record/stop` | — | Stops the active recording session for the given channel. |
+| `POST` | `/admin/channels/{id}/record/stop` | - | Stops the active recording session for the given channel. |
 
 ### Segment Store
 

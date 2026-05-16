@@ -54,7 +54,7 @@
           @username: Optional. HTTP Basic Auth username to protect the admin routes.
           @password: Optional. HTTP Basic Auth password to protect the admin routes.
         -->
-        <admin enabled="true" bind="127.0.0.1:9000" max-clients-list="100" username="admin" password="securepassword" />
+        <admin enabled="true" bind="127.0.0.1:9090" max-clients-list="100" username="admin" password="securepassword" />
 
         <!-- 
           client: Configurations for HTTP requests going outbound from this server.
