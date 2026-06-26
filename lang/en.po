@@ -135,3 +135,51 @@ msgstr ""
 
 msgid "Stream"
 msgstr ""
+
+msgid "HTML5 Player"
+msgstr ""
+
+msgid "Live Player"
+msgstr ""
+
+msgid "Webradio"
+msgstr ""
+
+msgid "Recently Played"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Artwork dynamically fetched natively from Apple Music."
+msgstr ""
+
+msgid "System powered by SPCast Media Delivery Node"
+msgstr ""
+
+msgid "Light Theme"
+msgstr ""
+
+msgid "Dark Theme"
+msgstr ""
+
+msgid "System Theme"
+msgstr ""
+
+msgid "Audio UI"
+msgstr ""
+
+msgid "Video UI"
+msgstr ""
+
+msgid "Live Video"
+msgstr ""
+
+msgid "Play/Pause"
+msgstr ""
+
+msgid "Volume"
+msgstr ""
+
+msgid "No active stream is currently running on this channel."
+msgstr ""

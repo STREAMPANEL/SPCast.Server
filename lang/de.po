@@ -47,7 +47,7 @@ msgid "Invalid channel ID format"
 msgstr "Ungültiges Channel-ID-Format"
 
 msgid "Invalid rendition ID format"
-msgstr "Ungültiges Rendition-ID Format"
+msgstr "Ungültiges Rendition-ID-Format"
 
 msgid "Unauthorized"
 msgstr "Nicht autorisiert"
@@ -77,19 +77,19 @@ msgid "The operator of this streaming node has not provided an imprint or a priv
 msgstr "Der Betreiber dieses Streaming-Knotens hat kein Impressum oder eine Datenschutzerklärung hinterlegt. Die Betreiberdetails sind uns nicht bekannt. Wir stellen lediglich die technische Streaming-Software zur Verfügung.<br><br><strong>Für Datenschutzfragen zu diesem Radio kontaktieren Sie bitte den Eigentümer oder Anbieter des Radiosenders direkt.</strong>"
 
 msgid "Server Logging (Logs)"
-msgstr "Server-Protokollierung (Logs)"
+msgstr "Serverprotokollierung (Logs)"
 
 msgid "Data Minimization Active"
 msgstr "Datenminimierung aktiv"
 
 msgid "Your IP address is anonymized before being stored in the server logs (Truncation Level {}). Direct identification is not possible."
-msgstr "Ihre IP-Adresse wird anonymisiert, bevor sie in den Server-Protokollen gespeichert wird (Verkürzungsstufe {}). Eine direkte Identifizierung ist nicht möglich."
+msgstr "Ihre IP-Adresse wird anonymisiert, bevor sie in den Serverprotokollen gespeichert wird (Verkürzungsstufe {}). Eine direkte Identifizierung ist nicht möglich."
 
 msgid "Full Logging Active"
 msgstr "Vollständige Protokollierung aktiv"
 
 msgid "Warning: Your IP address is stored unredacted and in full length in the server logs."
-msgstr "Warnung: Ihre IP-Adresse wird ungeschwärzt und in voller Länge in den Server-Protokollen gespeichert."
+msgstr "Warnung: Ihre IP-Adresse wird ungeschwärzt und in voller Länge in den Serverprotokollen gespeichert."
 
 msgid "IP address is truncated before transmission (Level {})."
 msgstr "IP-Adresse wird vor der Übertragung gekürzt (Stufe {})."
@@ -104,16 +104,16 @@ msgid "No external tracking services active."
 msgstr "Keine externen Tracking-Dienste aktiv."
 
 msgid "Data Processing for Live Streams"
-msgstr "Datenverarbeitung für Live-Streams"
+msgstr "Datenverarbeitung für Livestreams"
 
 msgid "Currently, no live streams are active. Therefore, no user-related stream processing occurs."
-msgstr "Aktuell sind keine Live-Streams aktiv. Daher findet keine benutzerbezogene Stream-Verarbeitung statt."
+msgstr "Aktuell sind keine Livestreams aktiv. Daher findet keine benutzerbezogene Streamverarbeitung statt."
 
 msgid "Privacy Information"
 msgstr "Datenschutzinformationen"
 
 msgid "Transparent real-time overview of server-side data processing"
-msgstr "Transparente Echtzeit-Übersicht der serverseitigen Datenverarbeitung"
+msgstr "Transparente Echtzeitübersicht der serverseitigen Datenverarbeitung"
 
 msgid "This endpoint directly reads the current technical configuration of the streaming server."
 msgstr "Dieser Endpunkt liest direkt die aktuelle technische Konfiguration des Streaming-Servers aus."
@@ -135,3 +135,51 @@ msgstr "Google Analytics 4:"
 
 msgid "Stream"
 msgstr "Stream"
+
+msgid "HTML5 Player"
+msgstr "HTML5-Player"
+
+msgid "Live Player"
+msgstr "Live-Player"
+
+msgid "Webradio"
+msgstr "Webradio"
+
+msgid "Recently Played"
+msgstr "Zuletzt gespielt"
+
+msgid "Unknown"
+msgstr "Unbekannt"
+
+msgid "Artwork dynamically fetched natively from Apple Music."
+msgstr "Cover-Bilder werden dynamisch von Apple Music geladen."
+
+msgid "System powered by SPCast Media Delivery Node"
+msgstr "System betrieben von SPCast Media Delivery Node"
+
+msgid "Light Theme"
+msgstr "Helles Design"
+
+msgid "Dark Theme"
+msgstr "Dunkles Design"
+
+msgid "System Theme"
+msgstr "System-Design"
+
+msgid "Audio UI"
+msgstr "Audio UI"
+
+msgid "Video UI"
+msgstr "Video UI"
+
+msgid "Live Video"
+msgstr "Live-Video"
+
+msgid "Play/Pause"
+msgstr "Wiedergabe/Pause"
+
+msgid "Volume"
+msgstr "Lautstärke"
+
+msgid "No active stream is currently running on this channel."
+msgstr "Auf diesem Kanal läuft derzeit kein aktiver Stream."
