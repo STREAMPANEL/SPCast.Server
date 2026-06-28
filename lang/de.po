@@ -183,3 +183,6 @@ msgstr "Lautstärke"
 
 msgid "No active stream is currently running on this channel."
 msgstr "Auf diesem Kanal läuft derzeit kein aktiver Stream."
+
+msgid "Click to Play"
+msgstr "Klicken zum Abspielen"

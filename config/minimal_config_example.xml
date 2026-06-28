@@ -43,7 +43,7 @@
                     <header name="Access-Control-Allow-Origin" value="*" />
                     <header name="Access-Control-Allow-Methods" value="GET, OPTIONS" />
                 </headers>
-                <ssl enabled="false" cert="/etc/letsencrypt/live/domain.com/fullchain.pem" key="/etc/letsencrypt/live/domain.com/privkey.pem" />
+                <ssl enabled="false" cert="/etc/letsencrypt/live/domain.com/fullchain.pem" key="/etc/letsencrypt/live/domain.com/privkey.pem" allow-http="false" http-redirect="false" />
                 <static enabled="true" path="./web" not-found="404.html" />
             </http>
         </delivery>

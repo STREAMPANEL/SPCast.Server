@@ -218,8 +218,10 @@
                   ssl: Native TLS termination. If enabled, the server will serve HTTPS directly.
                   For production, deploying a Reverse Proxy (like Nginx/HAProxy) is often preferred,
                   but native SSL is supported for simple deployments.
+                  @allow-http: "true" to allow plaintext HTTP on the SSL port (dual-protocol). Default: "false"
+                  @http-redirect: "true" to automatically redirect plaintext HTTP to HTTPS on the SSL port. Default: "false"
                 -->
-                <ssl enabled="false" cert="/etc/letsencrypt/live/domain.com/fullchain.pem" key="/etc/letsencrypt/live/domain.com/privkey.pem" />
+                <ssl enabled="false" cert="/etc/letsencrypt/live/domain.com/fullchain.pem" key="/etc/letsencrypt/live/domain.com/privkey.pem" allow-http="false" http-redirect="false" />
 
                 <!-- 
                   static: Simple Static File Server. 
