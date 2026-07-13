@@ -1,1 +1,4 @@
 .DS_Store
+bin/linux/co_hosting_proxy
+bin/mac/co_hosting_proxy
+bin/windows/co_hosting_proxy.exe
