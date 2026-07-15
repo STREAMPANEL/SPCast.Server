@@ -59,16 +59,16 @@ http://localhost:8080/live
 
 | Variant | URL |
 |---|---|
-| Master playlist (adaptive bitrate selection) | `http://localhost:8080/hls/test_channel/master.m3u8` |
-| Media playlist (specific rendition) | `http://localhost:8080/hls/test_channel/audio/index.m3u8` |
-| Individual segment (fetched by players internally) | `http://localhost:8080/hls/test_channel/audio/seg_X.m4s` |
+| Master playlist | `http://localhost:8080{mountpoint}/hls/master.m3u8` |
+| Media playlist | `http://localhost:8080{mountpoint}/hls/audio/index.m3u8` |
+| Individual segment | `http://localhost:8080{mountpoint}/hls/audio/seg_X.m4s` |
 
 #### MPEG DASH
 
 | Variant | URL |
 |---|---|
-| Manifest | `http://localhost:8080/dash/test_channel/manifest.mpd` |
-| Individual segment | `http://localhost:8080/dash/test_channel/segment_X.m4s` |
+| Manifest | `http://localhost:8080{mountpoint}/dash/manifest.mpd` |
+| Individual segment | `http://localhost:8080{mountpoint}/dash/segment_X.m4s` |
 
 #### Continuous Audio Streams (Direct Streams)
 
@@ -78,17 +78,9 @@ Primary routes (via mount path):
 
 | Format | URL |
 |---|---|
-| MP3 | `http://localhost:8080/live.mp3` |
-| AAC | `http://localhost:8080/live.aac` |
-| OPUS | `http://localhost:8080/live.opus` |
-
-Alternative direct access routes:
-
-| Format | URL |
-|---|---|
-| MP3 | `http://localhost:8080/stream/test_channel/live.mp3` |
-| AAC | `http://localhost:8080/stream/test_channel/live.aac` |
-| OPUS | `http://localhost:8080/stream/test_channel/live.opus` |
+| MP3 | `http://localhost:8080{mountpoint}/live.mp3` (or `http://localhost:8080{mountpoint}.mp3`) |
+| AAC | `http://localhost:8080{mountpoint}/live.aac` (or `http://localhost:8080{mountpoint}.aac`) |
+| OPUS | `http://localhost:8080{mountpoint}/live.opus` (or `http://localhost:8080{mountpoint}.opus`) |
 
 #### Video HLS
 
@@ -96,8 +88,8 @@ For channels with a video output configured, the following HLS endpoints are ava
 
 | Variant | URL |
 |---|---|
-| Master playlist | `http://localhost:8080/video-hls/test_channel/master.m3u8` |
-| Individual segment | `http://localhost:8080/video-hls/test_channel/seg_X.ts` |
+| Master playlist | `http://localhost:8080{mountpoint}/video-hls/master.m3u8` |
+| Individual segment | `http://localhost:8080{mountpoint}/video-hls/seg_X.ts` |
 
 ---
 

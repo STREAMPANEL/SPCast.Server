@@ -4,12 +4,17 @@ SPCast Media Edge includes a fully integrated, responsive, and modern HTML5 Web 
 
 ## 1. Accessing the Player
 
-By default, the player is served through the Delivery HTTP engine on the start page (e.g., `http://localhost:8080/main.html` or `/player.html`).
+By default, the player is served through the Delivery HTTP engine under each channel's mountpoint:
 
-If you have multiple channels configured, the player will automatically default to the first *enabled* channel in your configuration. 
-To link directly to a specific channel's player, use the `?channel=` URL parameter:
+`http://your-server.com:8080/{mountpoint}/player.html`
 
-`http://your-server.com:8080/main.html?channel=live1`
+For example, if a channel has the mountpoint `/live`, its player is accessible at:
+
+`http://your-server.com:8080/live/player.html`
+
+The main server dashboard listing all active streams is available at:
+
+`http://your-server.com:8080/main.html`
 
 ## 2. Features
 

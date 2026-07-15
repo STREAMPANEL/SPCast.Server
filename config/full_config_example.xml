@@ -38,6 +38,15 @@
         <logging level="debug" format="text" dir="./logs" max-size-mb="5" keep-files="5" privacy="yes" octave="2" />
 
         <!-- 
+          trusted-proxies: Optional list of proxy IP addresses.
+                           Note: Local loopback addresses (127.0.0.1 and ::1) are trusted by default.
+                           If configured, the server will trust the X-Forwarded-For and X-Real-IP headers
+                           coming from these additional IP addresses. Otherwise, they are ignored for security.
+                           @addresses: Comma-separated list of IPv4/IPv6 addresses of trusted reverse proxies.
+        -->
+        <!-- <trusted-proxies addresses="10.0.0.100, 192.168.1.50" /> -->
+
+        <!-- 
           metrics: Prometheus-compatible endpoint for system metrics (CPU, RAM, Connections).
           @enabled (true|false): Activates the metrics server
           @bind: Network interface and port for the scraper (e.g. Prometheus)
@@ -56,13 +65,76 @@
         -->
         <admin enabled="true" bind="127.0.0.1:9090" max-clients-list="100" username="admin" password="securepassword" />
 
+        <!--
+          admin-panel: Web-based Admin Panel accessible on the delivery port under /admin.
+          Requires a valid SPCast License.
+          @username: Username required for authentication. The admin panel is inactive if this is not set.
+          @password: Password required for authentication. The admin panel is inactive if this is not set.
+          @retention-days: How many days of historical statistics to keep in the database (Default: 730).
+                           Oldest entries are automatically pruned.
+          @allow-config-editing: Set to "true" to allow editing and reloading the configuration from the admin panel.
+                                 Default: "false" (highly recommended for production servers for security).
+        -->
+        <!-- <admin-panel username="myadmin" password="supersecret123" retention-days="730" allow-config-editing="false" /> -->
+
         <!-- 
           client: Configurations for HTTP requests going outbound from this server.
           @user-agent: The HTTP User-Agent string to use for pull ingests.
                        Note: Customizing the user-agent requires a valid SPCast License. 
                        Unlicensed instances will safely fall back to the default agent.
         -->
-        <client user-agent="SPCast.eu / HP-Media-Delivery-Node" />
+        <client user-agent="SPCast.eu / SPCast Media Edge" />
+
+        <!-- 
+          legacy-api: Configures compatibility APIs for legacy stream directories and stat scrapers.
+                      Supports queries formatted for Shoutcast v1/v2 (/admin.cgi), Icecast 2, and Icecast KH.
+          @enabled: Set to "true" to enable the compatibility endpoints.
+          @password: Dedicate a specific password for these legacy queries so that third-party PHP scripts (like PHP Fusion infusions, website widgets, or RadioToolbox) do not require your primary administrator or stream ingest passwords.
+                     NOTE: If legacy tools require you to send a username via HTTP Basic Auth, 
+                           the fixed username to use is "admin".
+        -->
+        <legacy-api enabled="true" password="legacy_secure_password" />
+
+        <!-- 
+          legacy-icecast: Configures compatibility endpoints simulating Icecast server statistics.
+                          Includes endpoints like /status-json.xsl, /status.xsl, and /status2.xsl.
+                          These are highly useful for legacy monitoring tools (like RadioToolbox).
+          @enabled: Set to "true" to enable the compatibility Icecast stats endpoints. (Default: "true")
+        -->
+        <legacy-icecast enabled="true" />
+
+        <!-- 
+          legacy-shoutcast: Configures compatibility endpoints simulating Shoutcast server statistics.
+                            Includes endpoints like /7.html, /7, and /stats.
+                            These are highly useful for legacy monitoring tools.
+          @enabled: Set to "true" to enable the compatibility Shoutcast stats endpoints. (Default: "true")
+        -->
+        <legacy-shoutcast enabled="true" />
+
+        <!-- 
+          legacy-listeners-show: Determines if legacy endpoints (/status-json.xsl, /7.html, /stats)
+                                 should show real listener and peak viewer counts.
+                                 If set to "false" (highly recommended for GDPR/privacy compliance),
+                                 all listener counts in these legacy endpoints will report as 0.
+          @enabled: Set to "true" to output real listener counts in legacy stats. (Default: "false")
+        -->
+        <legacy-listeners-show enabled="false" />
+
+        <!-- 
+          privacy: Configures system-wide data minimization and IP address anonymization.
+                   When enabled, all client IP addresses in server logs, admin panels, and statistics
+                   are masked.
+          @enabled: Set to "true" or "yes" to enable IP address anonymization. (Default: "true")
+        -->
+        <privacy enabled="true" />
+
+        <!-- 
+          octave: Configures the IP address truncation level for anonymization.
+                  - Value "1": Mask the last octet for IPv4 (e.g. 192.168.1.0) and last 80 bits for IPv6.
+                  - Value "2": Mask the last two octets for IPv4 (e.g. 192.168.0.0) and last 96 bits for IPv6.
+          @value: Truncation level (1 or 2). (Default: "2")
+        -->
+        <octave value="2" />
 
         <!-- 
           analytics: Global Server-Side Tracking Configuration (Google GA4 & Matomo).
@@ -75,10 +147,11 @@
               Tracks views to the Matomo HTTP Tracking API.
               @url: The tracking endpoint (e.g. "https://matomo.example.com/matomo.php").
               @site-id: The ID of the website in your Matomo dashboard.
+              @token-auth: Optional. Matomo Admin Auth Token. Required to override and track the listener's real IP.
               @privacy: "yes" to anonymize IP addresses, "no" to send full IPs. (Default: "yes")
               @octave: How much of the IP to mask. "1" (e.g. 127.0.0.*) or "2" (e.g. 127.0.*.*). (Default: 2)
             -->
-            <!-- <matomo url="https://matomo.domain.com/matomo.php" site-id="1" privacy="yes" octave="2" /> -->
+            <!-- <matomo url="https://matomo.domain.com/matomo.php" site-id="1" token-auth="your_token_auth_here" privacy="yes" octave="2" /> -->
 
             <!-- 
               ga4: Google Analytics 4 Measurement Protocol.
@@ -94,11 +167,32 @@
         <!--
           history: Metadata History API. Remember and serve the last X played songs per channel.
           This enables the GET /api/{channel_id}/history endpoint.
-          @enabled: "true" to enable history tracking.
+          @enabled: "true" to enable history tracking. (Default: "false")
           @default-limit: Default amount of history entries returned if no limit is specified.
           @max-limit: Maximum amount of history entries that can be requested or stored in RAM.
+          @retention-days: Number of days to keep play history records in the persistent database.
+          @show-button: "true" to show the metadata history button on the public main page or audioui. (Default: "false")
         -->
-        <history enabled="true" default-limit="10" max-limit="25" />
+        <history enabled="false" default-limit="10" max-limit="25" retention-days="30" />
+        
+        <!--
+          wishbox: Music Request box (Musikwunsch) for public player mounts.
+          @enabled: "true" to enable the wishbox form button on the public player.
+          @recipient-email: The email address that will receive the music requests.
+        -->
+        <wishbox enabled="false" recipient-email="moderator@example.com" />
+
+        <!--
+          smtp: SMTP configurations for wishbox email delivery.
+          Mandatory if the wishbox is enabled.
+        -->
+        <smtp>
+            <host>smtp.example.com</host>
+            <port>587</port> <!-- Allowed: 465 (Implicit TLS) or 587 (Explicit STARTTLS) -->
+            <username>user@example.com</username>
+            <password>secure_password</password>
+            <from-address>noreply@example.com</from-address>
+        </smtp>
 
         <!--
           language: Configurable Multi-Language-System (based on .po files in the lang/ directory).
@@ -130,6 +224,18 @@
             <!-- <max-session-duration value="3600" /> -->
         </limits>
         <!--
+          edge-redirection: Dynamically redirects HLS/DASH viewers to Edge Servers/CDNs when local limit is exceeded.
+          @enabled: If true, redirection is active.
+          @max-local-viewers: Maximum concurrent viewers allowed locally before redirecting new clients.
+          @bypass-header-name: Optional HTTP header name that edge nodes/CDNs use to bypass redirection.
+          @bypass-header-value: Expected value for the bypass header.
+          edge-node: Configured Edge/CDN URLs to redirect viewers to.
+        -->
+        <edge-redirection enabled="false" max-local-viewers="50" bypass-header-name="X-SPCast-Origin" bypass-header-value="true">
+            <edge-node url="https://edge1.yourdomain.com" />
+            <edge-node url="https://edge2.yourdomain.com" />
+        </edge-redirection>
+        <!--
           footer: Customizable footer displayed on the HTML web interface (index.html, Audio Player UI, Privacy Endpoint).
           Configure links to Dataprotection, Imprint, and up to 3 custom URLs.
           Privacy and Imprint are mandatory to ensure your listeners can identify the node operator and read the privacy policy.
@@ -143,6 +249,16 @@
             <custom name="Custom 3" url="" />
         </footer>
 
+        <!--
+          alias: Redirect or rewrite request paths to other destinations.
+                 Useful for legacy player compatibility (e.g. Shoutcast URL formats like "/;" or "/;stream").
+                 Supports multiple source/dest pairs.
+        -->
+        <!--
+        <alias source="/stream256" dest="/live/test_channel/icecast_mp3" />
+        <alias source="/;" dest="/live/test_channel/icecast_mp3" />
+        <alias source="/;stream" dest="/live/test_channel/icecast_mp3" />
+        -->
     </global>
 
     <!-- 
@@ -157,6 +273,16 @@
                       When the limit is reached, the oldest segments are immediately offloaded to disk (Disk Spooling / DVR).
         -->
         <segments type="memory-ring" max-bytes="2147483648" />
+        <!--
+          dvr: Retention options for spooled segments on disk.
+          @enabled: If true, segments evicted from RAM are saved to disk under ./dvr_spool (Default: true).
+          @retention-mins: Maximum age of spooled segments on disk before cleanup (Default: 30).
+          @max-gb: Maximum disk space footprint in gigabytes for spooled segments per channel (Default: 3).
+                   Calculation example (for retention-mins="30"):
+                     - Audio (320 kbps): 30 mins * ~2.4 MB/min = ~72 MB (1 GB is plenty)
+                     - Video (6 Mbps):   30 mins * ~45 MB/min  = ~1.35 GB (3 GB is recommended)
+        -->
+        <dvr enabled="true" retention-mins="30" max-gb="3" />
     </storage>
 
     <!-- 
@@ -187,6 +313,15 @@
             <!-- Global soft-limit for concurrent active viewers across all channels.
                  Note: Without a valid license, this cannot exceed 100. -->
             <max-viewers-default value="100" />
+
+            <!-- Rate limiting options to prevent flooding (e.g. opening 100 tabs).
+                 Checks are based on IP + User-Agent, so multiple devices in a household (NAT)
+                 are grouped separately.
+                 rate-limit-requests: Max requests allowed in the rate limit window.
+                 rate-limit-window-secs: Duration of the rate limit window in seconds.
+            -->
+            <rate-limit-requests value="40" />
+            <rate-limit-window-secs value="10" />
         </limits>
     </auth>
 
@@ -457,7 +592,7 @@
               This allows you to assign different GA4/Matomo properties to different channels.
             -->
             <analytics>
-                <!-- <matomo url="https://matomo.domain.com/matomo.php" site-id="2" privacy="yes" octave="2" /> -->
+                <!-- <matomo url="https://matomo.domain.com/matomo.php" site-id="2" token-auth="your_channel_token_auth_here" privacy="yes" octave="2" /> -->
                 <!-- <ga4 measurement-id="G-CHANNELXYZ" api-secret="ChannelSecretKeyHere" privacy="yes" octave="2" /> -->
             </analytics>
 
@@ -503,6 +638,26 @@
                 <!-- Optional: Insert raw custom HTML (like external links) into the player -->
                 <custom-html><![CDATA[<a href="https://example.com">More Info</a>]]></custom-html>
             </player>
+            <!-- 
+              recording: Configures stream archive/recording for this channel.
+              @enabled: Set to true to allow recording for this channel. (Default: false)
+                        Note: Recording is a premium feature and requires a valid license.
+              @path: Base directory where recordings will be saved. (Default: "./records")
+              @max-gb: Maximum space in Gigabytes allowed for recordings on this channel. (Default: 50)
+              @on-limit: Behavior when max-gb limit is reached: "overwrite" (delete oldest files) or "stop" (halt recording). (Default: "overwrite")
+              @auto-start: Automatically start recording when stream ingest starts. (Default: true)
+              @public: Share recordings publicly via /recordings.html (Default: false)
+              @show-public-button: Show a "Recordings" button on the public main page or audioui (Default: true)
+              @show-download-button: Show a "Download" button on the recordings list page (Default: true)
+            -->
+            <recording enabled="false" path="./records" max-gb="50" on-limit="overwrite" auto-start="true" public="false" show-public-button="true" show-download-button="true" />
+
+            <!--
+              wishbox: Channel-specific wishbox override.
+              @enabled: "true" to enable.
+              @recipient-email: The moderator's email address who will receive the requests for this channel.
+            -->
+            <!-- <wishbox enabled="true" recipient-email="channel-dj@example.com" /> -->
         </channel>
 
         <!-- Another channel, currently disabled. -->

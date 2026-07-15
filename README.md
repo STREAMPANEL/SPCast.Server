@@ -10,6 +10,8 @@ It is engineered for extreme efficiency designed to run close to the metal with 
 **Zero System Dependencies & True OS Independence**
 The core routing and connection handling of SPCast Media Edge operates completely stand-alone. There are no external dependencies, no complex runtimes, and no background services required. Because it is a compiled, self-contained binary, **it does not matter if you use Debian, Ubuntu, Windows, macOS, or any other modern operating system**. It will simply run everywhere without requiring specific system packages or OS-level dependencies. You just download the binary, run it, and start streaming!
 
+We've been using the server internally for a few years now. Since January 2024, we've also been running it in SPCAST hosting environments at [www.spcast.eu](https://www.spcast.eu). SPCAST Media Edge is tailored to our own needs, but it's also a great fit for external platforms or private hobby stations. The configuration is quite extensive but understandable and does require some technical understanding. If you run into any hurdles getting started that we as developers might not notice, feel free to let us know.
+
 ## Licensing & Limits
 - **Free Tier:** Using the media edge server is completely free of charge for up to 100 concurrent audio slots, or up to 5 concurrent video slots.
 - **Commercial:** If you require more concurrent slots, a valid license must be provided in your configuration. You can acquire a commercial license at: [https://www.spcast.eu/en/server/](https://www.spcast.eu/en/server/)

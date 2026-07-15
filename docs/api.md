@@ -26,9 +26,9 @@ These endpoints are served by the Delivery Engine (default port `8080`) and are 
 | Method | Path | Description |
 |---|---|---|
 | `GET` | `/main.html` | The main server dashboard/overview page. |
-| `GET` | `/player.html` | The integrated HTML5 audio web player (see `player.md`). |
+| `GET` | `/{mount}/player.html` | The integrated HTML5 audio web player (see `player.md`). |
 | `GET` | `/video/{channel_id}` | The integrated HTML5 video web player for a specific channel. |
-| `GET` | `/{mount}` | Icecast emulation mount points (e.g. `/live`) serve an embedded HTML player directly if accessed via a browser. |
+| `GET` | `/{mount}/audioui` | The Icecast emulation player GUI page, serving the Hls.js HTML player directly. |
 
 ### Privacy & Transparency
 
@@ -79,7 +79,7 @@ Base URL: `http://127.0.0.1:9090`
 
 | Method | Path | Body (JSON) | Description |
 |---|---|---|---|
-| `POST` | `/admin/channels/{id}/ingest/pull/start` | `{"url": "http://..."}` | Starts an HTTP Pull ingest for the given channel. The URL is validated against SSRF rules before connecting. |
+| `POST` | `/admin/channels/{id}/ingest/pull/start` | `{"url": "http://..."}` | Starts an HTTP Pull ingest for the given channel. The URL is validated against SSRF rules before connecting. Note: Loopback/Private IPs are allowed for relaying local streams; secure admin credentials to mitigate SSRF risk. |
 | `POST` | `/admin/channels/{id}/ingest/srt/start` | `{"bind_addr": "0.0.0.0:9001"}` | Starts an SRT listener ingest for the given channel. |
 | `POST` | `/admin/channels/{id}/ingest/stop` | - | Stops any running ingest pipeline for the given channel. |
 | `GET` | `/admin/channels/{id}/ingest/status` | - | Returns ingest statistics for a channel (bytes received, reconnect count, last error). |

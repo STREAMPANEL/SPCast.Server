@@ -26,4 +26,4 @@ You must ensure that the `ffmpeg` executable is either placed locally in the sam
 * **Linux:** [https://www.ffmpeg.org/download.html](https://www.ffmpeg.org/download.html)
   *(Alternatively via package manager: `sudo apt install ffmpeg` or `dnf install ffmpeg`)*
 
-> **Important Note:** Always ensure you download the static build matching your machine's CPU architecture (`x86_64`, `aarch64`/`ARM`) to prevent execution failures.
+> **Note:** Always ensure you download the static build matching your machine's CPU architecture (`x86_64`, `aarch64`/`ARM`) to prevent execution failures.

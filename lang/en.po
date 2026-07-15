@@ -186,3 +186,335 @@ msgstr ""
 
 msgid "Click to Play"
 msgstr ""
+
+msgid "Admin Panel"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Config Reference"
+msgstr ""
+
+msgid "Total Listeners"
+msgstr ""
+
+msgid "Active Channels"
+msgstr ""
+
+msgid "Server Uptime"
+msgstr ""
+
+msgid "License Status"
+msgstr ""
+
+msgid "Channels"
+msgstr ""
+
+msgid "Peak Listeners"
+msgstr ""
+
+msgid "Direct Streams"
+msgstr ""
+
+msgid "HLS Viewers"
+msgstr ""
+
+msgid "Ingest Protocol"
+msgstr ""
+
+msgid "Direct Listeners"
+msgstr ""
+
+msgid "HLS/DASH Viewers"
+msgstr ""
+
+msgid "Move Listener"
+msgstr ""
+
+msgid "Move Client"
+msgstr ""
+
+msgid "Kick"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "User Agent"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "Data Transferred"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "No active direct connections."
+msgstr ""
+
+msgid "No active HLS/DASH sessions."
+msgstr ""
+
+msgid "Channel Details"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "HLS/DASH viewers are stateless. Kicking or moving individual sessions is not supported by adaptive streaming protocols."
+msgstr ""
+
+msgid "Listener History"
+msgstr ""
+
+msgid "Minute"
+msgstr ""
+
+msgid "10 Min"
+msgstr ""
+
+msgid "Hourly"
+msgstr ""
+
+msgid "Config Editor"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "Direct edits to config.xml can disrupt streaming operations if invalid options are set. Edit with care."
+msgstr ""
+
+msgid "Select the destination channel where this client connection should be redirected."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Discard Changes"
+msgstr ""
+
+msgid "Save Config"
+msgstr ""
+
+msgid "Reload & Apply Config"
+msgstr ""
+
+msgid "Are you sure you want to disconnect this listener?"
+msgstr ""
+
+msgid "Failed to kick listener."
+msgstr ""
+
+msgid "No other active target channels available for redirect."
+msgstr ""
+
+msgid "Move failed: "
+msgstr ""
+
+msgid "No historical statistics stored in database yet."
+msgstr ""
+
+msgid "Last Seen"
+msgstr ""
+
+msgid "Licensed"
+msgstr ""
+
+msgid "Unlicensed"
+msgstr ""
+
+msgid "Offline"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Channel:"
+msgstr ""
+
+msgid "Listeners"
+msgstr ""
+
+msgid "Failed to load config"
+msgstr ""
+
+msgid "Error loading config"
+msgstr ""
+
+msgid "Saving and validating configuration..."
+msgstr ""
+
+msgid "Config saved successfully! Click 'Reload & Apply Config' to activate changes."
+msgstr ""
+
+msgid "Reloading and applying configuration..."
+msgstr ""
+
+msgid "Configuration hot-reloaded successfully!"
+msgstr ""
+
+msgid "Reload error"
+msgstr ""
+
+msgid "Failed to reload config"
+msgstr ""
+
+msgid "Network error"
+msgstr ""
+
+msgid "Recent Events"
+msgstr ""
+
+msgid "Timestamp"
+msgstr ""
+
+msgid "Event"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "No recent events recorded."
+msgstr ""
+
+msgid "Recordings"
+msgstr ""
+
+msgid "Recording Active"
+msgstr ""
+
+msgid "Disk Usage"
+msgstr ""
+
+msgid "No recordings found."
+msgstr ""
+
+msgid "Are you sure you want to delete this recording file?"
+msgstr ""
+
+msgid "Recording is a premium feature and requires a valid license."
+msgstr ""
+
+msgid "File (Path)"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Refresh Interval"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Previous Month"
+msgstr ""
+
+msgid "Next Month"
+msgstr ""
+
+msgid "Select a day to view recordings"
+msgstr ""
+
+msgid "Back to Calendar"
+msgstr ""
+
+msgid "Play"
+msgstr ""
+
+msgid "Pause"
+msgstr ""
+
+msgid "Are you sure you want to disconnect the live DJ?"
+msgstr ""
+
+msgid "Failed to disconnect live DJ."
+msgstr ""
+
+msgid "History"
+msgstr ""
+
+msgid "Play History"
+msgstr ""
+
+msgid "No history found."
+msgstr ""
+
+msgid "Select a day to view play history"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Playlist History"
+msgstr ""
+
+msgid "Select Date"
+msgstr ""
+
+msgid "Wishbox"
+msgstr ""
+
+msgid "Song artist"
+msgstr ""
+
+msgid "Song title"
+msgstr ""
+
+msgid "Passed to"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Your E-mail"
+msgstr ""
+
+msgid "Submit wish"
+msgstr ""
+
+msgid "Wish sent successfully!"
+msgstr ""
+
+msgid "Failed to send wish."
+msgstr ""
+
+msgid "All fields are required."
+msgstr ""
+
+msgid "Invalid email address."
+msgstr ""
+
+msgid "Channel not found"
+msgstr ""
+
+msgid "Wishbox is disabled"
+msgstr ""
+
+

@@ -51,4 +51,5 @@ To explore the specific features of SPCast Media Edge, please refer to the dedic
 - **[API & Admin Endpoints](api.md)** - Internal control API, Prometheus metrics, and Server-Sent Events.
 - **[Player Documentation](player.md)** - Details about the built-in HTML5 Web Player.
 - **[FFmpeg Integration](ffmpeg.md)** - How transcoding works and when it is needed.
+- **[Rate Limiting & Edge Redirection](rate_limiting_and_edge_redirection.md)** - Protect and scale stream delivery under heavy traffic.
 - **[Dependencies & Licenses](dependencies.md)** - Detailed list of used open-source crates and their licensing.

@@ -186,3 +186,335 @@ msgstr "Auf diesem Kanal läuft derzeit kein aktiver Stream."
 
 msgid "Click to Play"
 msgstr "Klicken zum Abspielen"
+
+msgid "Admin Panel"
+msgstr "Adminpanel"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Statistics"
+msgstr "Statistiken"
+
+msgid "Config Reference"
+msgstr "Konfigurationsreferenz"
+
+msgid "Total Listeners"
+msgstr "Hörer gesamt"
+
+msgid "Active Channels"
+msgstr "Aktive Kanäle"
+
+msgid "Server Uptime"
+msgstr "Server-Betriebszeit"
+
+msgid "License Status"
+msgstr "Lizenzstatus"
+
+msgid "Channels"
+msgstr "Kanäle"
+
+msgid "Peak Listeners"
+msgstr "Hörer-Peak"
+
+msgid "Direct Streams"
+msgstr "Direkte Streams"
+
+msgid "HLS Viewers"
+msgstr "HLS-Zuschauer"
+
+msgid "Ingest Protocol"
+msgstr "Ingest-Protokoll"
+
+msgid "Direct Listeners"
+msgstr "Direkte Hörer"
+
+msgid "HLS/DASH Viewers"
+msgstr "HLS/DASH-Zuschauer"
+
+msgid "Move Listener"
+msgstr "Hörer verschieben"
+
+msgid "Move Client"
+msgstr "Client verschieben"
+
+msgid "Kick"
+msgstr "Kicken"
+
+msgid "Move"
+msgstr "Verschieben"
+
+msgid "IP Address"
+msgstr "IP-Adresse"
+
+msgid "User Agent"
+msgstr "User-Agent"
+
+msgid "Protocol"
+msgstr "Protokoll"
+
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Data Transferred"
+msgstr "Übertragene Daten"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "No active direct connections."
+msgstr "Keine aktiven direkten Verbindungen."
+
+msgid "No active HLS/DASH sessions."
+msgstr "Keine aktiven HLS/DASH-Sitzungen."
+
+msgid "Channel Details"
+msgstr "Kanaldetails"
+
+msgid "Back"
+msgstr "Zurück"
+
+msgid "HLS/DASH viewers are stateless. Kicking or moving individual sessions is not supported by adaptive streaming protocols."
+msgstr "HLS/DASH-Zuschauer sind verbindungslos. Das Kicken oder Verschieben einzelner Hörer wird bei adaptiven Streaming-Protokollen nicht unterstützt."
+
+msgid "Listener History"
+msgstr "Hörer-Verlauf"
+
+msgid "Minute"
+msgstr "Minute"
+
+msgid "10 Min"
+msgstr "10 Min"
+
+msgid "Hourly"
+msgstr "Stündlich"
+
+msgid "Config Editor"
+msgstr "Konfigurationseditor"
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid "Direct edits to config.xml can disrupt streaming operations if invalid options are set. Edit with care."
+msgstr "Direktes Editieren der config.xml kann den Streaming-Betrieb stören, wenn ungültige Optionen gesetzt werden. Mit Vorsicht editieren."
+
+msgid "Select the destination channel where this client connection should be redirected."
+msgstr "Wähle den Zielkanal aus, an den diese Client-Verbindung weitergeleitet werden soll."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Discard Changes"
+msgstr "Änderungen verwerfen"
+
+msgid "Save Config"
+msgstr "Konfiguration speichern"
+
+msgid "Reload & Apply Config"
+msgstr "Konfiguration laden & anwenden"
+
+msgid "Are you sure you want to disconnect this listener?"
+msgstr "Bist du sicher, dass du diesen Hörer trennen möchtest?"
+
+msgid "Failed to kick listener."
+msgstr "Hörer konnte nicht getrennt werden."
+
+msgid "No other active target channels available for redirect."
+msgstr "Keine anderen aktiven Zielkanäle für eine Weiterleitung verfügbar."
+
+msgid "Move failed: "
+msgstr "Verschieben fehlgeschlagen: "
+
+msgid "No historical statistics stored in database yet."
+msgstr "Noch keine historischen Statistiken in der Datenbank gespeichert."
+
+msgid "Last Seen"
+msgstr "Zuletzt gesehen"
+
+msgid "Licensed"
+msgstr "Lizenziert"
+
+msgid "Unlicensed"
+msgstr "Nicht lizenziert"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "None"
+msgstr "Kein"
+
+msgid "Channel:"
+msgstr "Kanal:"
+
+msgid "Listeners"
+msgstr "Hörer"
+
+msgid "Failed to load config"
+msgstr "Konfiguration konnte nicht geladen werden"
+
+msgid "Error loading config"
+msgstr "Fehler beim Laden der Konfiguration"
+
+msgid "Saving and validating configuration..."
+msgstr "Speichere und validiere Konfiguration..."
+
+msgid "Config saved successfully! Click 'Reload & Apply Config' to activate changes."
+msgstr "Konfiguration erfolgreich gespeichert! Klicke auf 'Konfiguration laden & anwenden', um die Änderungen zu aktivieren."
+
+msgid "Reloading and applying configuration..."
+msgstr "Lade Konfiguration neu und wende sie an..."
+
+msgid "Configuration hot-reloaded successfully!"
+msgstr "Konfiguration erfolgreich heißgeladen!"
+
+msgid "Reload error"
+msgstr "Fehler beim Neuladen"
+
+msgid "Failed to reload config"
+msgstr "Neuladen der Konfiguration fehlgeschlagen"
+
+msgid "Network error"
+msgstr "Netzwerkfehler"
+
+msgid "Recent Events"
+msgstr "Ereignis-Protokoll"
+
+msgid "Timestamp"
+msgstr "Zeitstempel"
+
+msgid "Event"
+msgstr "Ereignis"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "No recent events recorded."
+msgstr "Keine kürzlichen Ereignisse aufgezeichnet."
+
+msgid "Recordings"
+msgstr "Aufnahmen"
+
+msgid "Recording Active"
+msgstr "Aufnahme aktiv"
+
+msgid "Disk Usage"
+msgstr "Speichernutzung"
+
+msgid "No recordings found."
+msgstr "Keine Aufnahmen gefunden."
+
+msgid "Are you sure you want to delete this recording file?"
+msgstr "Sind Sie sicher, dass Sie diese Aufnahmedatei löschen möchten?"
+
+msgid "Recording is a premium feature and requires a valid license."
+msgstr "Die Aufnahmefunktion ist ein Premium-Feature und erfordert eine gültige Lizenz."
+
+msgid "File (Path)"
+msgstr "Datei (Pfad)"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Refresh Interval"
+msgstr "Aktualisierungsintervall"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "Previous Month"
+msgstr "Vorheriger Monat"
+
+msgid "Next Month"
+msgstr "Nächster Monat"
+
+msgid "Select a day to view recordings"
+msgstr "Wähle einen Tag, um Aufnahmen anzuzeigen"
+
+msgid "Back to Calendar"
+msgstr "Zurück zum Kalender"
+
+msgid "Play"
+msgstr "Wiedergabe"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Are you sure you want to disconnect the live DJ?"
+msgstr "Bist du sicher, dass du die Verbindung des Live-DJs trennen möchtest?"
+
+msgid "Failed to disconnect live DJ."
+msgstr "Verbindung des Live-DJs konnte nicht getrennt werden."
+
+msgid "History"
+msgstr "Verlauf"
+
+msgid "Play History"
+msgstr "Titelverlauf"
+
+msgid "No history found."
+msgstr "Kein Verlauf gefunden."
+
+msgid "Select a day to view play history"
+msgstr "Wähle einen Tag, um den Verlauf anzuzeigen"
+
+msgid "Time"
+msgstr "Uhrzeit"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Playlist History"
+msgstr "Titelverlauf"
+
+msgid "Select Date"
+msgstr "Datum wählen"
+
+msgid "Wishbox"
+msgstr "Wunschbox"
+
+msgid "Song artist"
+msgstr "Interpret"
+
+msgid "Song title"
+msgstr "Titel"
+
+msgid "Passed to"
+msgstr "Weitergegeben an"
+
+msgid "Your name"
+msgstr "Dein Name"
+
+msgid "Your E-mail"
+msgstr "Deine E-Mail"
+
+msgid "Submit wish"
+msgstr "Musikwunsch abschicken"
+
+msgid "Wish sent successfully!"
+msgstr "Musikwunsch erfolgreich gesendet!"
+
+msgid "Failed to send wish."
+msgstr "Musikwunsch konnte nicht gesendet werden."
+
+msgid "All fields are required."
+msgstr "Alle Felder sind Pflichtfelder."
+
+msgid "Invalid email address."
+msgstr "Ungültige E-Mail-Adresse."
+
+msgid "Channel not found"
+msgstr "Kanal nicht gefunden"
+
+msgid "Wishbox is disabled"
+msgstr "Wunschbox ist deaktiviert"
+
+

@@ -5,13 +5,33 @@
         <hostname></hostname>
         <radio-name>SPCast Media Edge</radio-name>
         <logging level="debug" format="text" dir="./logs" max-size-mb="5" keep-files="5" privacy="yes" octave="2" />
+        <!-- <trusted-proxies addresses="10.0.0.100" /> -->
         <metrics enabled="false" bind="0.0.0.0:9100" path="/metrics" />
         <admin enabled="true" bind="127.0.0.1:9090" max-clients-list="100" username="admin" password="securepassword" />
-        <client user-agent="SPCast.eu / HP-Media-Delivery-Node" />
+        <!-- <admin-panel username="admin" password="securepassword" allow-config-editing="false" /> -->
+        <legacy-api enabled="true" password="legacy_secure_password" />
+        <legacy-icecast enabled="true" />
+        <legacy-shoutcast enabled="true" />
+        <legacy-listeners-show enabled="false" />
+        <privacy enabled="true" />
+        <octave value="2" />
+        <client user-agent="SPCast.eu / SPCast Media Edge" />
         <analytics global="false" />
-        <history enabled="true" default-limit="10" max-limit="25" />
+        <history enabled="false" default-limit="10" max-limit="25" retention-days="30" />
+        <wishbox enabled="false" recipient-email="moderator@example.com" />
+        <smtp>
+            <host>smtp.example.com</host>
+            <port>587</port>
+            <username>user@example.com</username>
+            <password>secure_password</password>
+            <from-address>noreply@example.com</from-address>
+        </smtp>
         <language auto-detect="false" default="en" />
         <limits />
+        <edge-redirection enabled="false" max-local-viewers="50" bypass-header-name="X-SPCast-Origin" bypass-header-value="true">
+            <edge-node url="https://edge1.yourdomain.com" />
+            <edge-node url="https://edge2.yourdomain.com" />
+        </edge-redirection>
         <footer>
             <privacy url="" />
             <imprint url="" />
@@ -19,10 +39,16 @@
             <custom name="Custom 2" url="" />
             <custom name="Custom 3" url="" />
         </footer>
+        <!--
+        <alias source="/stream256" dest="/live/test_channel/icecast_mp3" />
+        <alias source="/;" dest="/live/test_channel/icecast_mp3" />
+        <alias source="/;stream" dest="/live/test_channel/icecast_mp3" />
+        -->
     </global>
 
     <storage>
         <segments type="memory-ring" max-bytes="2147483648" />
+        <dvr enabled="true" retention-mins="30" max-gb="3" />
     </storage>
 
     <auth>
@@ -33,6 +59,8 @@
         <limits>
             <max-connections-per-ip value="10" />
             <max-viewers-default value="100" />
+            <rate-limit-requests value="40" />
+            <rate-limit-window-secs value="10" />
         </limits>
     </auth>
 
@@ -102,6 +130,8 @@
                 <no-cover-url>https://example.com/nocover.png</no-cover-url>
                 <custom-html><![CDATA[<a href="https://example.com">More Info</a>]]></custom-html>
             </player>
+            <recording enabled="false" path="./records" max-gb="50" on-limit="overwrite" auto-start="true" public="false" show-public-button="true" show-download-button="true" />
+            <wishbox enabled="false" recipient-email="channel-dj@example.com" />
         </channel>
 
         <channel id="event_stream" preset="live-default" enabled="false">
